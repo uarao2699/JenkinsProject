@@ -1,42 +1,30 @@
 pipeline {
-  agent any
+  agent none
+
   stages {
-    stage('Build') {
+    stage("Test back end") {
+      agent {
+        dockerfile {
+          filename "back-end/dockerfiles/ci/Dockerfile"
+        }
+      }
+
       steps {
-        sh 'npm install'
+        sh "cd back-end && bin/ci"
       }
     }
 
-    stage('Test') {
+    stage("Test front end") {
+      agent {
+        dockerfile {
+          filename "front-end/dockerfiles/ci/Dockerfile"
+        }
+      }
+
       steps {
-        sh './jenkins/scripts/test.sh'
+        sh "rm -f front-end/node_modules && ln -s /app/node_modules front-end/node_modules"
+        sh "cd front-end && bin/ci"
       }
     }
-
-    stage('Deliver for development') {
-      when {
-        branch 'development'
-      }
-      steps {
-        sh './jenkins/scripts/deliver-for-development.sh'
-        input 'Finished using the web site? (Click "Proceed" to continue)'
-        sh './jenkins/scripts/kill.sh'
-      }
-    }
-
-    stage('Deploy for production') {
-      when {
-        branch 'production'
-      }
-      steps {
-        sh './jenkins/scripts/deploy-for-production.sh'
-        input 'Finished using the web site? (Click "Proceed" to continue)'
-        sh './jenkins/scripts/kill.sh'
-      }
-    }
-
-  }
-  environment {
-    CI = 'true'
   }
 }
