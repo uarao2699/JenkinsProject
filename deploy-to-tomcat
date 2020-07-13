@@ -7,7 +7,7 @@ node{
    stage('SCM Checkout'){
         git branch: 'master', 
 	        credentialsId: 'uarao2699',
-	        url: 'https://github.com/uarao2699/JenkinsPipeline.git'
+	        url: 'https://github.com/uarao2699/JenkinsProject'
    }
    stage('Maven Build'){
         def mvnHome = tool name: 'maven3', type: 'maven'
