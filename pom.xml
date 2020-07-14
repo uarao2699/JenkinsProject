@@ -4,12 +4,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>tcs.ion</groupId>
+  <groupId>Abhijit</groupId>
   <artifactId>TestApp</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>TestApp</name>
-  <url>https://g25.tcsion.com/LX/login#lx</url>
+  <url>http://ec2-18-222-103-219.us-east-2.compute.amazonaws.com:8080/job/project1/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
